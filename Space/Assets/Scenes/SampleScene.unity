@@ -204,7 +204,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.25293687, g: 0.27441874, b: 0.30817598, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -380,6 +380,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   grappleHook: {fileID: 1351506120}
+  target: {fileID: 0}
+  range: 10
 --- !u!50 &822166659
 Rigidbody2D:
   serializedVersion: 4
@@ -542,6 +544,7 @@ GameObject:
   - component: {fileID: 1236716694}
   - component: {fileID: 1236716697}
   - component: {fileID: 1236716696}
+  - component: {fileID: 1236716698}
   m_Layer: 6
   m_Name: Asteroid
   m_TagString: Untagged
@@ -678,6 +681,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1236716698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236716693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53c379262a4e0c45a36a989917ed037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attached: 0
+  speed: 5
 --- !u!1 &1351506120
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +792,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+      key0: {r: 0.654088, g: 0.654088, b: 0.654088, a: 1}
       key1: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
