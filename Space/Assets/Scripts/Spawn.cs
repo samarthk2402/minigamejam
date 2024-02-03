@@ -1,35 +1,41 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
     public GameObject obj;
-    public float spawnTime;
-    public float spawnSpeed;
+    public float minSpawnTime = 1f;
+    public float maxSpawnTime = 5f;
+    public float spawnSpeed = 5f;
 
     private float timer;
 
     public GameObject player;
 
     public float margin = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Initial spawn
+        timer = Random.Range(minSpawnTime, maxSpawnTime);
+        SpawnObj(obj);
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if(timer >= spawnTime){
-            timer = 0;
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            timer = Random.Range(minSpawnTime, maxSpawnTime);
             SpawnObj(obj);
         }
     }
 
-    private void SpawnObj(GameObject obj){
+    private void SpawnObj(GameObject obj)
+    {
         GameObject o = Instantiate(obj, GetRandomPositionOnScreenEdge(), Quaternion.identity);
         Vector3 dir = (player.transform.position - o.transform.position).normalized;
         o.GetComponent<Rigidbody2D>().velocity = dir * spawnSpeed;

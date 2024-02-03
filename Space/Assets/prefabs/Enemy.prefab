@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 3049142610532182716}
   - component: {fileID: 7237551525576298393}
   - component: {fileID: 155543510351167948}
-  m_Layer: 0
+  - component: {fileID: 3945183176518306678}
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +105,7 @@ MonoBehaviour:
   player: {fileID: 0}
   bullet_speed: 5
   timer: 0
-  shootingTime: 2
+  shootingTime: 4
 --- !u!50 &3049142610532182716
 Rigidbody2D:
   serializedVersion: 4
@@ -183,3 +184,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   player: {fileID: 0}
+--- !u!114 &3945183176518306678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797126726927153199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810acc90878521e4abe1f695c7e382b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  farThreshold: 0.5

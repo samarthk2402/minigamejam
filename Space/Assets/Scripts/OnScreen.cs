@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class OnScreen : MonoBehaviour
 {
-    bool IsObjectOnScreen(GameObject obj)
+    public float farThreshold = 2.0f;
+
+    // Function to check if an object is really far outside the screen
+    bool IsObjectReallyFarOutsideScreen(GameObject obj)
     {
         if (obj == null)
         {
@@ -23,15 +26,23 @@ public class OnScreen : MonoBehaviour
         // Get the object's position in viewport coordinates
         Vector3 viewportPoint = mainCamera.WorldToViewportPoint(obj.transform.position);
 
-        // Check if the object is on screen (within [0, 1] for both x and y axes)
-        bool isOnScreen = viewportPoint.x >= 0f && viewportPoint.x <= 1f && viewportPoint.y >= 0f && viewportPoint.y <= 1f;
+        // Calculate distance outside the screen for each axis
+        float distanceOutsideX = Mathf.Max(0f, Mathf.Abs(viewportPoint.x - 0.5f) - 0.5f);
+        float distanceOutsideY = Mathf.Max(0f, Mathf.Abs(viewportPoint.y - 0.5f) - 0.5f);
 
-        return isOnScreen;
-    }  
-    
-    void Update(){
-        if(!IsObjectOnScreen(this.gameObject)){
-            Destroy(this.gameObject);
+        // Calculate the overall distance outside the screen
+        float totalDistanceOutside = Mathf.Sqrt(distanceOutsideX * distanceOutsideX + distanceOutsideY * distanceOutsideY);
+
+        // Check if the object is really far outside the screen based on the threshold
+        return totalDistanceOutside > farThreshold;
+    }
+
+    void Update()
+    {
+        // Example usage: Check if this GameObject is really far outside the screen
+        if (IsObjectReallyFarOutsideScreen(gameObject))
+        {
+            Destroy(gameObject);
         }
     }
 }
