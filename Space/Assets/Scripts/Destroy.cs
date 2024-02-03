@@ -17,7 +17,7 @@ public class Destroy : MonoBehaviour
         // Check if the collided object is on the specified layer
         if (collision.gameObject.layer == 6)
         {
-            player.GetComponent<GrappleScript>().targetAlive = false;
+            //player.GetComponent<GrappleScript>().targetAlive = false;
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
 

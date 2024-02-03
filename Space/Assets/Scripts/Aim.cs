@@ -6,7 +6,7 @@ public class Aim : MonoBehaviour
 {
     public LineRenderer lr;
     public Transform gun; 
-    public Transform hook;
+    public GameObject hook;
     public GameObject attached;
     public float grappleSpeed = 3f;
     public enum GrapplingState{
@@ -38,13 +38,15 @@ public class Aim : MonoBehaviour
 
         switch(gState){
             case GrapplingState.Shooting:
+                hook.SetActive(true);
                 Shoot(targetPos);
                 break;
             case GrapplingState.Retracting:
+                hook.SetActive(true);
                 Retract();
                 break;
             case GrapplingState.Idle:
-
+                hook.SetActive(false);
                 if(attached != null){
                     lr.positionCount = 2;
                     lr.SetPosition(0, gun.position);
@@ -66,7 +68,7 @@ public class Aim : MonoBehaviour
                 break;
         }
 
-        hook.position = hookEnd;
+        hook.transform.position = hookEnd;
     }
 
     void Shoot(Vector3 target)
