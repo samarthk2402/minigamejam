@@ -12,7 +12,7 @@ public class GrappleScript : MonoBehaviour
 
     //private bool isGrappling = false;
     private Rigidbody2D rb;
-    private DistanceJoint2D joint;
+    //private DistanceJoint2D joint;
 
     private bool grappleShooting = false;
     private bool grappleRetracting = false;
@@ -27,16 +27,16 @@ public class GrappleScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        joint = GetComponent<DistanceJoint2D>();
-        joint.enabled = false;
+        // joint = GetComponent<DistanceJoint2D>();
+        // joint.enabled = false;
 
         lr = grappleHook.GetComponent<LineRenderer>();
         lr.positionCount = 1;
-        lr.SetPosition(0, transform.position);
     }
 
     void Update()
     {
+        lr.SetPosition(0, grappleHook.transform.position);
         if (Input.GetMouseButtonDown(0))
         {
             //Debug.Log("Grapple!");
@@ -63,12 +63,14 @@ public class GrappleScript : MonoBehaviour
 
         if(grappleRetracting){
             ShootGrapple(grappleTarget);
+            if(target != null){
+                    target.GetComponent<Swing>().attached = false;
+                    target = null;
+                    grappleAttached = false;
+                }
 
             if(Vector2.Distance(hookPos, grappleTarget) <= 0.05f){
                 grappleRetracting = false;
-                grappleAttached = false;
-                target.GetComponent<Swing>().attached = false;
-                target = null;
                 //Debug.Log("reached");
             }
         }
@@ -100,9 +102,9 @@ public class GrappleScript : MonoBehaviour
         {
             target = hit.collider.gameObject;
             //isGrappling = true;
-            joint.enabled = true;
-            joint.connectedAnchor = hit.point;
-            joint.distance = Vector2.Distance(rb.position, hit.point);
+            // joint.enabled = true;
+            // joint.connectedAnchor = hit.point;
+            // joint.distance = Vector2.Distance(rb.position, hit.point);
 
             lr.positionCount = 2;
 
@@ -116,8 +118,7 @@ public class GrappleScript : MonoBehaviour
             Vector2 homePos = new Vector2(grappleHook.transform.position.x, grappleHook.transform.position.y);
 
             grappleMissing = true;
-            Vector2 dir = mousePos - homePos;
-            dir.Normalize();
+            Vector2 dir = (mousePos - homePos).normalized;
             Vector2 extendedDir = homePos + dir*range;
             grappleTarget = new Vector2(extendedDir.x, extendedDir.y);
             hookPos = homePos;
