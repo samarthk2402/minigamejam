@@ -12,7 +12,7 @@ public class GrappleScript : MonoBehaviour
 
     //private bool isGrappling = false;
     private Rigidbody2D rb;
-    //private DistanceJoint2D joint;
+    private DistanceJoint2D joint;
 
     private bool grappleShooting = false;
     private bool grappleRetracting = false;
@@ -23,12 +23,17 @@ public class GrappleScript : MonoBehaviour
     private Vector2 hookPos;
 
     public float range;
+    public float scrollSpeed = 5f;
+    public bool sliding = false;
+    public Vector3 sliding_dir;
+
+    public bool target_alive = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // joint = GetComponent<DistanceJoint2D>();
-        // joint.enabled = false;
+        joint = GetComponent<DistanceJoint2D>();
+        joint.enabled = false;
 
         lr = grappleHook.GetComponent<LineRenderer>();
         lr.positionCount = 1;
@@ -36,6 +41,7 @@ public class GrappleScript : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(target);
         lr.SetPosition(0, grappleHook.transform.position);
         if (Input.GetMouseButtonDown(0))
         {
@@ -55,8 +61,10 @@ public class GrappleScript : MonoBehaviour
 
             if(Vector2.Distance(hookPos, grappleTarget) <= 0.05f){
                 grappleShooting = false;
-                grappleAttached = true;
-                target.GetComponent<Swing>().attached = true;
+                if(target != null){
+                    grappleAttached = true;
+                    target.GetComponent<Swing>().attached = true;
+                }
                 //Debug.Log("reached");
             }
         }
@@ -67,10 +75,12 @@ public class GrappleScript : MonoBehaviour
                     target.GetComponent<Swing>().attached = false;
                     target = null;
                     grappleAttached = false;
-                }
+                    joint.enabled = false;
+            }
 
             if(Vector2.Distance(hookPos, grappleTarget) <= 0.05f){
                 grappleRetracting = false;
+                lr.positionCount = 1;
                 //Debug.Log("reached");
             }
         }
@@ -87,9 +97,44 @@ public class GrappleScript : MonoBehaviour
         }
 
         if(grappleAttached){
-            lr.positionCount = 2;
-            lr.SetPosition(1, hookPos);
-            hookPos = Vector2.Lerp(hookPos, target.transform.position, grappleSpeed);
+            if(target_alive){
+
+                joint.enabled = true;
+                joint.connectedAnchor = target.transform.position;
+                joint.distance = Vector2.Distance(grappleHook.transform.position, target.transform.position);
+                lr.positionCount = 2;
+                lr.SetPosition(1, hookPos);
+                hookPos = Vector2.Lerp(hookPos, target.transform.position, grappleSpeed);
+
+                float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+
+                // Check if there is any scroll input
+                if (scrollInput != 0f)
+                {
+                    // Scroll detected, do something with the input
+                    // For example, you can move an object up or down based on the scroll input
+                    // Here, we'll just print the scroll input to the console
+                    //Debug.Log("Scroll Input: " + scrollInput);
+
+                    // You can also use the input to modify a variable or perform other actions
+                    // For example, adjusting the camera's field of view based on the scroll input
+                    sliding_dir = ((target.transform.position - transform.position).normalized)*scrollInput;
+                    sliding = true;
+                }
+
+                if(Input.GetMouseButtonDown(2)){
+                    sliding = false;
+                    rb.velocity = Vector2.zero;
+                }
+            }else{
+                grappleAttached = false;
+                grappleRetracting = true;
+                grappleTarget = grappleHook.transform.position;
+            }
+        }
+
+        if(sliding){
+            Slide(sliding_dir);
         }
     }
 
@@ -102,15 +147,13 @@ public class GrappleScript : MonoBehaviour
         {
             target = hit.collider.gameObject;
             //isGrappling = true;
-            // joint.enabled = true;
-            // joint.connectedAnchor = hit.point;
-            // joint.distance = Vector2.Distance(rb.position, hit.point);
 
             lr.positionCount = 2;
 
             grappleShooting = true;
             grappleTarget = hit.point;
             hookPos = grappleHook.transform.position;
+            target_alive = true;
 
         }else{
             lr.positionCount = 2;
@@ -129,6 +172,11 @@ public class GrappleScript : MonoBehaviour
             lr.positionCount = 2;
             lr.SetPosition(1, hookPos);
             hookPos = Vector2.Lerp(hookPos, target, grappleSpeed);
+    }
+
+    private void Slide(Vector3 dir){
+        rb.velocity = dir*scrollSpeed;
+        //Debug.Log(dir);
     }
 
     // void StopGrapple()
