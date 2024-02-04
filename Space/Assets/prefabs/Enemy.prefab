@@ -212,10 +212,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2278229161e95c42962ab0929c40e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachineCam: {fileID: 0}
+  shakeIntensity: 5
+  shakeTime: 1
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
   player: {fileID: 0}
+  explosionPrefab: {fileID: 3064045491735445849, guid: 6adb70a6ddb212143bb4d23bfa5bf37c, type: 3}
 --- !u!114 &3945183176518306678
 MonoBehaviour:
   m_ObjectHideFlags: 0

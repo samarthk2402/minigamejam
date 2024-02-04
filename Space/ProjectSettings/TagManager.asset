@@ -14,7 +14,7 @@ TagManager:
   - Grapplable
   - Enemy
   - Player
-  - 
+  - Glow
   - 
   - 
   - 
@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 4001279963
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 1222401693
     locked: 0

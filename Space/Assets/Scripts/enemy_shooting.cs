@@ -24,7 +24,7 @@ public class enemy_shooting : MonoBehaviour
         if(timer >= shootingTime){
             timer = 0;
             Shoot();
-            Debug.Log("shoot");
+            //Debug.Log("shoot");
         }
     }
 
