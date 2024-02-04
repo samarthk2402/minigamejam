@@ -36,12 +36,12 @@ public class Spawn : MonoBehaviour
 
     private void SpawnObj(GameObject obj)
     {
-        GameObject o = Instantiate(obj, GetRandomPositionOnScreenEdge(), Quaternion.identity);
+        GameObject o = Instantiate(obj, GetRandomPositionAwayFromScreenEdge(margin), Quaternion.identity);
         Vector3 dir = (player.transform.position - o.transform.position).normalized;
         o.GetComponent<Rigidbody2D>().velocity = dir * spawnSpeed;
     }
 
-    Vector2 GetRandomPositionOnScreenEdge()
+    Vector2 GetRandomPositionAwayFromScreenEdge(float distanceFromEdge)
     {
         Camera mainCamera = Camera.main;
 
@@ -65,23 +65,23 @@ public class Spawn : MonoBehaviour
         switch (randomEdge)
         {
             case 0: // Top edge
-                randomX = Random.Range(margin, screenWidth - margin);
-                randomY = screenHeight + margin;
+                randomX = Random.Range(distanceFromEdge, screenWidth - distanceFromEdge);
+                randomY = screenHeight + distanceFromEdge;
                 break;
 
             case 1: // Bottom edge
-                randomX = Random.Range(margin, screenWidth - margin);
-                randomY = -margin;
+                randomX = Random.Range(distanceFromEdge, screenWidth - distanceFromEdge);
+                randomY = -distanceFromEdge;
                 break;
 
             case 2: // Left edge
-                randomX = -margin;
-                randomY = Random.Range(margin, screenHeight - margin);
+                randomX = -distanceFromEdge;
+                randomY = Random.Range(distanceFromEdge, screenHeight - distanceFromEdge);
                 break;
 
             case 3: // Right edge
-                randomX = screenWidth + margin;
-                randomY = Random.Range(margin, screenHeight - margin);
+                randomX = screenWidth + distanceFromEdge;
+                randomY = Random.Range(distanceFromEdge, screenHeight - distanceFromEdge);
                 break;
         }
 
@@ -94,4 +94,5 @@ public class Spawn : MonoBehaviour
         // Return a Vector2
         return new Vector2(randomWorldPosition.x, randomWorldPosition.y);
     }
+
 }

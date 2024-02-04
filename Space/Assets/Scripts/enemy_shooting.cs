@@ -35,5 +35,11 @@ public class enemy_shooting : MonoBehaviour
 
         bullet_rb.velocity = ((player.transform.position - transform.position).normalized)*bullet_speed;
 
+        Vector3 rot = player.transform.position - b.transform.position;
+
+        float rotZ = Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg;
+
+        b.transform.rotation = Quaternion.Euler(0, 0, rotZ);
+
     }
 }
