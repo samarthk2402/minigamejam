@@ -6,9 +6,11 @@ public class bullet : MonoBehaviour
 {
     public GameObject hearts;
     public GameObject explosionPrefab;
+    public GameObject player;
 
     void Awake(){
         hearts = GameObject.Find("Hearts");
+        player = GameObject.Find("Player");
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,6 +21,7 @@ public class bullet : MonoBehaviour
             Explode();
             if(collision.gameObject.layer == 8){
                 hearts.GetComponent<Health>().health -= 1;
+                player.GetComponent<Animator>().SetTrigger("Damage");
             }
             Destroy(this.gameObject);
 
