@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attached: 0
-  speed: 30
+  speed: 50
 --- !u!114 &-6642917438384924719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,4 +176,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810acc90878521e4abe1f695c7e382b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farThreshold: 0.5
+  farThreshold: 0.1

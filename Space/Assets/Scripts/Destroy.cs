@@ -13,6 +13,7 @@ public class Destroy : MonoBehaviour
     public LayerMask targetLayer;
     public GameObject player;
     public GameObject explosionPrefab;
+    public float min_velocity;
 
     private float shakeTimer = 0;
 
@@ -44,7 +45,7 @@ public class Destroy : MonoBehaviour
         // Check if the collided object is on the specified layer
         if (collision.gameObject.layer == 6)
         {
-            if(collision.gameObject.GetComponent<Swing>().attached){
+            if(collision.gameObject.GetComponent<Swing>().attached && collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > min_velocity){
                 Explode();
                 Shake(shakeIntensity, shakeTime);
                 scoreText.GetComponentInChildren<Score>().score += 1;

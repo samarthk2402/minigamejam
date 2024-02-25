@@ -544,6 +544,7 @@ GameObject:
   - component: {fileID: 578937561}
   - component: {fileID: 578937563}
   - component: {fileID: 578937562}
+  - component: {fileID: 578937564}
   m_Layer: 5
   m_Name: Astronaut
   m_TagString: Untagged
@@ -560,14 +561,14 @@ RectTransform:
   m_GameObject: {fileID: 578937560}
   m_LocalRotation: {x: -0, y: -0, z: -0.29781792, w: 0.95462275}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 994866327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -34.653}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -220, y: -46}
+  m_AnchoredPosition: {x: -206, y: -8}
   m_SizeDelta: {x: 391.6401, y: 391.6401}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &578937562
@@ -608,6 +609,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578937560}
   m_CullTransparentMesh: 1
+--- !u!114 &578937564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578937560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca1672aea24f21246a1a07a956268a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatSpeed: 0
+  rotationSpeed: 50
+  floatRange: 0
 --- !u!1 &628253465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,7 +1696,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.14117648, g: 0.14117648, b: 0.14117648, a: 0}
+  m_BackGroundColor: {r: 0.2, g: 0.27450982, b: 0.38431373, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

@@ -7,6 +7,8 @@ using UnityEngine.Rendering.Universal;
 
 public class Health : MonoBehaviour
 {
+    public Animator playerAnim;
+    public Animator transitionAnim;
     public int health = 3;
     public GameObject heart1;
     public GameObject heart2;
@@ -53,7 +55,7 @@ public class Health : MonoBehaviour
                 heart3.SetActive(false);
                 heart2.SetActive(false);
                 heart1.SetActive(false);
-                SceneManager.LoadScene(2);
+                StartCoroutine(LoadScene());
                 break;
             case 1:
                 heart3.SetActive(false);
@@ -77,6 +79,13 @@ public class Health : MonoBehaviour
                 // SetOpacity(opacity3);
                 break;
         }
+    }
+
+    IEnumerator LoadScene(){
+        transitionAnim.SetTrigger("End");
+        playerAnim.SetTrigger("Death"); 
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(2);
     }
 
     // void SetOpacity(float alpha)

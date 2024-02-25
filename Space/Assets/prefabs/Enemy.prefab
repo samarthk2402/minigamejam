@@ -213,13 +213,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cinemachineCam: {fileID: 0}
+  scoreText: {fileID: 0}
   shakeIntensity: 5
-  shakeTime: 1
+  shakeTime: 0.5
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
   player: {fileID: 0}
   explosionPrefab: {fileID: 3064045491735445849, guid: 6adb70a6ddb212143bb4d23bfa5bf37c, type: 3}
+  min_velocity: 10
 --- !u!114 &3945183176518306678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,4 +234,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810acc90878521e4abe1f695c7e382b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farThreshold: 0.5
+  farThreshold: 0.1
